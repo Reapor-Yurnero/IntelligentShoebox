@@ -1,11 +1,10 @@
-# Shoes
+# IntelligentShoebox
+
 
 ## Usage
-
-Just 
 
 ```bash
 python3 main.py
 ```
 
-and view <http://localhost:13000>.
+then view <http://localhost:13000>.
