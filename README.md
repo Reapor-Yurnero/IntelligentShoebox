@@ -1,4 +1,11 @@
-# IntelligentShoebox
-Product for Vg100
+# Shoes
 
-For some personal reason, I can not fetch my codes from my Raspberry Pi(which is locked in a dark room) in a short period. Sorry.
+## Usage
+
+Just 
+
+```bash
+python3 main.py
+```
+
+and view <http://localhost:13000>.

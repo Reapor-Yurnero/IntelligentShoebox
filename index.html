@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <script type="text/javascript">
+        var cid = 10;
+
+        function changeid(id){
+            if (cid==11) cid=id;
+        }
+        function loadXMLDoc(obj, cmd) {
+            if (cid==10){
+                cid=11;
+                obj.innerHTML = "Done";
+                document.getElementById(cmd+"hint").style.visibility="visible"
+                return;
+            }
+            cid=10;
+            obj.innerHTML = cmd.toString();
+            document.getElementById(cmd+"hint").style.visibility="hidden"
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    alert(xmlhttp.responseText);
+                }
+            }
+
+            obj.onclick = function () {loadXMLDoc(this, 'light', 0);}
+            xmlhttp.open("GET", "/" + cmd + "?cid=" + cid, true);
+            xmlhttp.send();
+        }
+    </script>
+    <style type="text/css">
+        * {
+            background: ;
+            text-align: center;
+            margin: 0;
+            border: 0;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>Shoes</h1>
+    </div>
+    <div class="row">
+        {% for i in range(8) %}
+            {% if l[i]=="n" %}
+                <img src="static/pics/0.jpg" class="img-thumbnail"/>
+            {% else %}
+                <img src="{{static_url('pics/' + str(i)+ '.jpg')}}" class="img-thumbnail" onclick="changeid({{i}})" />
+            {% end %}
+            {% if i==3 %}<br />{% end %}
+        {% end %}
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <button id="put" class="btn btn-primary" value="put" onclick="loadXMLDoc(this, 'put')">Save my shoe</button>
+        </div>
+        <div class="col-md-3">
+            <button id="get" class="btn btn-primary" value="get" onclick="loadXMLDoc(this, 'get')">Withdraw</button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+</body>
+
+</html>
